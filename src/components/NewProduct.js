@@ -7,7 +7,7 @@ const NewProduct = () => {
         <div className="card">
           <div className="card-body">
             <h2 className="text-center mb-4 font-weight-bold">
-              Agregar nuevo producto.
+              Agregar Nuevo Producto.
             </h2>
             <form>
               <div className="form-group">
