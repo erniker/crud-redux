@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+// Actions de Redux
+import { createNewProductAction } from "../actions/productActions";
 
 const NewProduct = () => {
+  // Component state
+  const [name, saveName] = useState("");
+  const [price, savePrice] = useState(0);
+  // Using useDispatch. This create and return a function
+  const dispatch = useDispatch();
+  // Call the action from productActions
+  const addProduct = (product) => dispatch(createNewProductAction(product));
+
+  // When user submited
+  const submitNewProduct = (e) => {
+    e.preventDefault();
+
+    // Validate form
+    if (name.trim() === "" || price <= 0) {
+      return;
+    }
+    // If there is not errors
+
+    // Create new product
+    addProduct({ name, price });
+  };
+
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
@@ -9,7 +35,7 @@ const NewProduct = () => {
             <h2 className="text-center mb-4 font-weight-bold">
               Agregar Nuevo Producto.
             </h2>
-            <form>
+            <form onSubmit={submitNewProduct}>
               <div className="form-group">
                 <label>Nombre Producto</label>
                 <input
@@ -17,6 +43,8 @@ const NewProduct = () => {
                   type="text"
                   placeholder="Nombre del producto"
                   name="name"
+                  value={name}
+                  onChange={(e) => saveName(e.target.value)}
                 />
               </div>
               <div className="form-group">
@@ -26,6 +54,8 @@ const NewProduct = () => {
                   type="number"
                   placeholder="Precio del producto"
                   name="price"
+                  value={price}
+                  onChange={(e) => savePrice(Number(e.target.value))}
                 />
               </div>
               <button
