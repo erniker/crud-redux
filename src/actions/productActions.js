@@ -5,6 +5,13 @@ import {
   START_PRODUCTS_DOWNLOAD,
   PRODUCTS_DOWNLOAD_SUCCESS,
   PRODUCTS_DOWNLOAD_ERROR,
+  GET_PRODUCT_TO_DELETE,
+  PRODUCT_DELETED_SUCCESS,
+  PRODUCT_DELETED_ERROR,
+  GET_PRODUCT_TO_EDIT,
+  START_PRODUCT_EDIT,
+  PRODUCT_EDITED_SUCCESS,
+  PRODUCT_EDITED_ERROR,
 } from "../types";
 
 import axiosClient from "../config/axios";
@@ -27,7 +34,7 @@ export function createNewProductAction(product) {
       // If an error ocurred, change the state
       dispatch(addProductError(true));
 
-      // Erro Alert
+      // Error Alert
       Swal.fire({
         icon: "error",
         title: "Hubo un error",
@@ -81,4 +88,73 @@ const downloadProductsSuccess = (products) => ({
 const downloadProductsError = () => ({
   type: PRODUCTS_DOWNLOAD_ERROR,
   payload: true,
+});
+
+// Select and delete the product
+export function deleteProductAction(id) {
+  return async (dispatch) => {
+    dispatch(getProductToDelete(id));
+    try {
+      await axiosClient.delete(`/productos/${id}`);
+      dispatch(deleteProductSuccess());
+
+      // If deleted, show alert
+      Swal.fire("Eliminado", "El producto ha sido eliminado", "success");
+    } catch (error) {
+      console.log(error);
+      dispatch(deleteProductError());
+    }
+  };
+}
+
+const getProductToDelete = (id) => ({
+  type: GET_PRODUCT_TO_DELETE,
+  payload: id,
+});
+
+const deleteProductSuccess = () => ({
+  type: PRODUCT_DELETED_SUCCESS,
+});
+
+const deleteProductError = () => ({
+  type: PRODUCT_DELETED_ERROR,
+  payload: true,
+});
+
+// Put product to edit
+export function getProductToEdit(product) {
+  return (dispatch) => {
+    dispatch(getProductToEditAction(product));
+  };
+}
+
+const getProductToEditAction = (product) => ({
+  type: GET_PRODUCT_TO_EDIT,
+  payload: product,
+});
+
+// Edit register on API and on the state
+export function editProductAction(product) {
+  return async (dispatch) => {
+    dispatch(editProduct());
+    try {
+      await axiosClient.put(`/productos/${product.id}`, product);
+      dispatch(editProductSuccess(product));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+const editProduct = () => ({
+  type: START_PRODUCT_EDIT,
+});
+
+const editProductSuccess = (product) => ({
+  type: PRODUCT_EDITED_SUCCESS,
+  payload: product,
+});
+
+const editProductError = () => ({
+  type: PRODUCT_EDITED_ERROR,
 });

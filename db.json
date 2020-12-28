@@ -3,12 +3,12 @@
     {
       "id": 1,
       "name": "Jugo de Zanahoria",
-      "price": "31111"
+      "price": "600"
     },
     {
       "id": 2,
       "name": "Jugo de Naranja",
-      "price": "1"
+      "price": "2"
     },
     {
       "name": "Jugo de Naranja",
@@ -31,34 +31,9 @@
       "id": 6
     },
     {
-      "name": "Rib Eye",
-      "price": 300,
+      "name": "Zumo de piña",
+      "price": "199",
       "id": 7
-    },
-    {
-      "name": "Rib Eye",
-      "price": 300,
-      "id": 8
-    },
-    {
-      "name": "José Pablo",
-      "price": 65,
-      "id": 9
-    },
-    {
-      "name": "JOSE PABLO MEDINA",
-      "price": 234,
-      "id": 10
-    },
-    {
-      "name": "JOSE PABLO MEDINA",
-      "price": 234,
-      "id": 11
-    },
-    {
-      "name": "José Pablo",
-      "price": 345,
-      "id": 12
     }
   ]
 }
