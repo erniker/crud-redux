@@ -34,6 +34,11 @@
       "name": "Zumo de piña",
       "price": "199",
       "id": 7
+    },
+    {
+      "name": "Helado de fresa",
+      "price": 150,
+      "id": 8
     }
   ]
 }
