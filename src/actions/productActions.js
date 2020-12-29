@@ -142,6 +142,7 @@ export function editProductAction(product) {
       dispatch(editProductSuccess(product));
     } catch (error) {
       console.log(error);
+      dispatch(editProductError());
     }
   };
 }
@@ -157,4 +158,5 @@ const editProductSuccess = (product) => ({
 
 const editProductError = () => ({
   type: PRODUCT_EDITED_ERROR,
+  payload: true,
 });
